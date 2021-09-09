@@ -52,9 +52,5 @@ const steps = [
 ]
 
 exports.seed = function(knex) {
-  // Deletes ALL existing entries
-  return knex('steps').truncate()
-    .then(() => {
-      return knex('steps').insert(steps)
-  })
+  return knex('steps').insert(steps)
 };

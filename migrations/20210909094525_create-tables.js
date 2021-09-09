@@ -1,7 +1,7 @@
 
 exports.up = function(knex) {
   return knex.schema.createTable('recipe', tbl => {
-    tbl.increments();
+    tbl.increments('recipeId');
     tbl.string("recipe_name", 128).notNullable();
     tbl.timestamp('created_at').defaultTo(knex.fn.now());
   })
@@ -14,32 +14,38 @@ exports.up = function(knex) {
       tbl.integer('recipe_id')
         .unsigned()
         .notNullable()
-        .references('id')
-        .inTable('recipe');
+        .references('recipeId')
+        .inTable('recipe')
+        .onDelete("RESTRICT")
+        .onUpdate("RESTRICT");
   })
   .createTable('ingredients', tbl => {
-      tbl.increments();
+      tbl.increments('ingredientID');
       tbl.string('ingredient_name', 128)
         .notNullable();
-      tbl.integer('step_id')
-        .unsigned()
-        .notNullable()
-        .references('stepID')
-        .inTable('steps');
   })
-  .createTable('quantities', tbl => {
+  .createTable('ingredients_step', tbl => {
       tbl.increments();
-      tbl.string('weight', 6);
+      tbl.string('quantity', 6);
       tbl.integer('step_id')
         .unsigned()
         .notNullable()
         .references('stepID')
-        .inTable('steps');
+        .inTable('steps')
+        .onDelete("RESTRICT")
+        .onUpdate("RESTRICT")
+      tbl.integer('ingredients_id')
+        .unsigned()
+        .notNullable()
+        .references('ingredientID')
+        .inTable('ingredients')
+        .onDelete("RESTRICT")
+        .onUpdate("RESTRICT");
   })
 };
 
 exports.down = function(knex) {
-  return knex.schema.dropTableIfExists('quantities')
+  return knex.schema.dropTableIfExists('ingredients_step')
     .dropTableIfExists('ingredients')
     .dropTableIfExists('steps')
     .dropTableIfExists('recipe')
