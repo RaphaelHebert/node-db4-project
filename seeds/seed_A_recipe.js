@@ -1,7 +1,7 @@
 
 const recipies = [
   {
-    recipe_name: "Boeuf Bourgignon"
+    recipe_name: "Boeuf Bourguignon"
   },
   {
     recipe_name: "Mash potatoes"

@@ -18,8 +18,9 @@ async function getRecipeByIdHelper(recipe_id){
    const recipe = await db('recipe as r')
    .leftJoin('steps as s', 'r.recipeId', 's.recipe_id')
    .leftJoin('ingredients_step as q', 's.stepID', 'q.step_id')
-   .join('ingredients as i', 'i.ingredientID', 'q.ingredients_id' )
+   .leftJoin('ingredients as i', 'i.ingredientID', 'q.ingredients_id' )
    .where('r.recipeId', recipe_id)
+
    console.log(recipe)
    return recipe
 }

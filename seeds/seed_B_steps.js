@@ -5,7 +5,7 @@ const steps = [
     recipe_id: 1
   },
   {
-    step_instructions: "add the veg",
+    step_instructions: "add the veg and prepare some cheese",
     step_number: 2,
     recipe_id: 1
   },
@@ -45,7 +45,7 @@ const steps = [
     recipe_id: 3
   },
   {
-    step_instructions: "cook in the oven at max temperature during 30 minutes",
+    step_instructions: "cook in the oven at max temperature during 30 minutes and add some cheese",
     step_number: 3,
     recipe_id: 3
   }
